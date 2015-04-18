@@ -57,29 +57,31 @@ end
 
 
 
-#get '/:birthdate' do 
-#	birthdate = params[:birthdate]
-#	path_number = find_birth_path(birthdate)
-#	@message = get_message(path_number)
-#	erb :index	
-#end
+get '/:birthdate' do 
+	setup_index_view
+end
 
-#get '/newpage/' do
-#	@random = "hello!"
-#	erb :newpage
-#end
+get '/newpage/' do
+	@random = "hello!"
+	erb :newpage
+end
 
 get '/' do
 	erb :form
 end
 
 post '/' do
+	setup_index_view
+end
+
+
+def setup_index_view
 	raw_birthdate = params[:birthday]
 	birthdate = raw_birthdate.tr('-', '')
 		path_number = find_birth_path(birthdate)
 		@message = get_message(path_number)
 	"#{@message}"
-
+	erb :index
 end
 
 
