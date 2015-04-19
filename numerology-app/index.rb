@@ -71,8 +71,7 @@ get '/' do
 end
 
 post '/' do
-	raw_birthdate = params[:birthday]
-	birthdate = raw_birthdate.tr('-', '')
+	birthdate = params[:birthday].gsub('-', '')
 	path_number = find_birth_path(birthdate)
 	redirect "/message/#{path_number}"
 end
