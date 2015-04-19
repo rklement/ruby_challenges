@@ -71,18 +71,31 @@ get '/' do
 end
 
 post '/' do
-	setup_index_view
-end
-
-
-def setup_index_view
 	raw_birthdate = params[:birthday]
 	birthdate = raw_birthdate.tr('-', '')
-		path_number = find_birth_path(birthdate)
-		@message = get_message(path_number)
-	"#{@message}"
+	path_number = find_birth_path(birthdate)
+	redirect "/message/#{path_number}"
+end
+
+get '/message/:path_number' do
+	path_number = params[:path_number].to_i
+	@message = get_message(path_number)
 	erb :index
 end
+
+
+
+
+#def setup_index_view
+#	raw_birthdate = params[:birthday]
+#	birthdate = raw_birthdate.tr('-', '')
+#	path_number = find_birth_path(birthdate)
+#	@message = get_message(path_number)
+#	"#{@message}"
+#	erb :index
+#end
+
+
 
 
 
