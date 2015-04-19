@@ -6,8 +6,10 @@
 	<form class="col-md-3" action="/" method="post">
 		<div class="form-group">
 			<label for="birthday">Enter your birthdate:</label>
-			<input type="date" class="form-control" name="birthday">
+			<input type="text" class="form-control" name="birthday">
 		</div>
 		<input class="btn btn-default" type="submit">
 	</form>
+
+	<p><%= @error %></p>
 </div>

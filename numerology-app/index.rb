@@ -54,6 +54,15 @@ def get_message(path_number)
 	end
 end
 
+def valid_birthdate(input)
+	if (input.length == 8) && (input.match(/^[0-9]+[0-9]$/))
+		return true
+	else
+		return false
+	end
+
+end
+
 
 
 
@@ -71,9 +80,16 @@ get '/' do
 end
 
 post '/' do
-	birthdate = params[:birthday].gsub('-', '')
-	path_number = find_birth_path(birthdate)
-	redirect "/message/#{path_number}"
+	birthdate = params[:birthday]
+	if valid_birthdate(birthdate)
+		path_number = find_birth_path(birthdate)
+		redirect "/message/#{path_number}"
+	else
+
+		@error = "Sorry, your input was invalid.  Please enter 8 numbers."
+		erb :form
+
+	end
 end
 
 get '/message/:path_number' do
