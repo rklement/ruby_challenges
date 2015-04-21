@@ -63,9 +63,6 @@ def valid_birthdate(input)
 
 end
 
-
-
-
 get '/:birthdate' do 
 	setup_index_view
 end
