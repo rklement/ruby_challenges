@@ -63,7 +63,7 @@ def valid_birthdate(input)
 
 end
 
-get '/:birthdate' do 
+get '/:birthday' do 
 	setup_index_view
 end
 
@@ -77,7 +77,7 @@ get '/' do
 end
 
 post '/' do
-	birthdate = params[:birthday]
+	birthdate = params[:birthday].gsub("-", "")
 	if valid_birthdate(birthdate)
 		path_number = find_birth_path(birthdate)
 		redirect "/message/#{path_number}"
@@ -98,14 +98,13 @@ end
 
 
 
-#def setup_index_view
-#	raw_birthdate = params[:birthday]
-#	birthdate = raw_birthdate.tr('-', '')
-#	path_number = find_birth_path(birthdate)
-#	@message = get_message(path_number)
-#	"#{@message}"
-#	erb :index
-#end
+def setup_index_view
+	birthdate = params[:birthday]
+	path_number = find_birth_path(birthdate)
+	@message = get_message(path_number)
+	"#{@message}"
+	erb :index
+end
 
 
 
