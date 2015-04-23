@@ -2,30 +2,17 @@ require 'sinatra'
 
 
 def find_birth_path(birthdate)
-	digit_1 = birthdate[0].to_i
-	digit_2 = birthdate[1].to_i
-	digit_3 = birthdate[2].to_i
-	digit_4 = birthdate[3].to_i
-	digit_5 = birthdate[4].to_i
-	digit_6 = birthdate[5].to_i
-	digit_7 = birthdate[6].to_i
-	digit_8 = birthdate[7].to_i
+ 	number = birthdate[0].to_i + birthdate[1].to_i + birthdate[2].to_i + birthdate[3].to_i + birthdate[4].to_i + birthdate[5].to_i + birthdate[6].to_i + birthdate[7].to_i
 
-	number = digit_1 + digit_2 + digit_3 + digit_4 + digit_5 + digit_6 + digit_7 + digit_8
-	number = number.to_s
+    number = number.to_s
+    number = number[0].to_i + number[1].to_i
 
-	digit_1 = number[0].to_i
-	digit_2 = number[1].to_i
+    if number > 9
+      number = number.to_s
+      number = number[0].to_i + number[1].to_i
+    end
 
-	number = digit_1 + digit_2
-
-	if number > 9 
-		number = number.to_s
-		digit_1 = number[0].to_i
-		digit_2 = number[1].to_i
-		number = digit_1 + digit_2
-	end
-	return number
+    return number
 end
 
 
@@ -34,7 +21,7 @@ def get_message(path_number)
 	
 	case (path_number)
 		when 1
-			message =  "Your numerology number is #{path_number}. One is the leader.  The number one indicates the ability to stand alone, and is a strong vibration.  Ruled by the Sun".
+			message =  "Your numerology number is #{path_number}. One is the leader. The number one indicates the ability to stand alone, and is a strong vibration. Ruled by the Sun.".
 		when 2
 			message = "Your numerology number is #{path_number}. This is the mediator and peace-lover. The number two indicates the desire for harmony. It is a gentle, considerate, and sensitive vibration. Ruled by the Moon."
 		when 3
@@ -102,7 +89,7 @@ def setup_index_view
 	birthdate = params[:birthday]
 	path_number = find_birth_path(birthdate)
 	@message = get_message(path_number)
-	"#{@message}"
+	
 	erb :index
 end
 
