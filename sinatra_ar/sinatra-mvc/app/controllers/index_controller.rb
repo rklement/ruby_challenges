@@ -1,40 +1,32 @@
-get '/:birthday' do 
-	setup_index_view
+get '/:birthdate' do
+  setup_index_view
+end
+
+get '/message/:birth_path_num' do
+  birth_path_num = params[:birth_path_num].to_i
+  @message = Person.get_message(birth_path_num)
+  erb :index
 end
 
 get '/' do
-	erb :form
+  erb :form
 end
 
 post '/' do
-	birthdate = params[:birthday].gsub("-", "")
-	if Person.valid_birthdate(birthdate)
-		path_number = Person.find_birth_path(birthdate)
-		redirect "/message/#{path_number}"
-	else
+  birthdate = params[:birthdate].gsub("-", "")
 
-		@error = "Sorry, your input was invalid.  Please enter 8 numbers."
-		erb :form
-
-	end
-end
-
-get '/message/:path_number' do
-	path_number = params[:path_number].to_i
-	@message = Person.get_message(path_number)
-	erb :index
+  if Person.valid_birthdate(birthdate)
+    birth_path_num = Person.get_birth_path_num(birthdate)
+    redirect "/message/#{birth_path_num}"
+  else
+    @error = "Oops! You should enter a valid birthdate in the form of mmddyyyy. Try again!"
+    erb :form    
+  end
 end
 
 def setup_index_view
-	birthdate = params[:birthday]
-	path_number = Person.find_birth_path(birthdate)
-	@message = Person.get_message(path_number)
-	erb :index
+	birthdate = params[:birthdate]
+	birth_path_num = Person.get_birth_path_num(birthdate)
+	@message = Person.get_message(birth_path_num)
+  erb :index
 end
-
-
-
-
-
-
-
