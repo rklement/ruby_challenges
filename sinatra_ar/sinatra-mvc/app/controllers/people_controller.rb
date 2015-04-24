@@ -4,6 +4,7 @@ get '/people/:id' do
    path_num = Person.find_birth_path(birthdate_string)
    	@first = @person.first_name
    	@last = @person.last_name
+   	@birthdate = birthdate_string
       @message = Person.get_message(path_num)
    erb :"/people/show"
 end
