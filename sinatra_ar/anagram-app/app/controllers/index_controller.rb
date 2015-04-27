@@ -1,9 +1,9 @@
 require 'sinatra'
 
-
-get '/'
+get '/' do
 	erb :index
 end
+
 
 get '/anagrams/:word'  do 
 	@word = params[:word]
@@ -15,3 +15,4 @@ post '/' do
   @word = params[:word]
   redirect "/anagrams/#{@word}"
 end
+
