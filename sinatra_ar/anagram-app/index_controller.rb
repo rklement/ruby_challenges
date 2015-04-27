@@ -1,0 +1,6 @@
+get '/'
+
+
+	erb :index
+
+end
