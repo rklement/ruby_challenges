@@ -1,4 +1,9 @@
 <h1>Anagrams for <%= "#{@word}" %></h1>
 <ul>
-    (loop through @anagrams and print out each one inside a list tag)
+   	<%= @anagrams.each do |a|
+   		puts "<li>#{a}</li>"
+   	end
+   	%>
+
+
 </ul>  
