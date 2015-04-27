@@ -1,3 +1,11 @@
 source 'https://rubygems.org'
+require "bundler/setup"
 
+gem 'pg'
+
+gem 'sinatra'
+gem 'rake'
 gem 'rspec'
+gem 'rack'
+gem 'rack-test'
+gem 'faker'
