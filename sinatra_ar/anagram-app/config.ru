@@ -7,7 +7,5 @@ require 'rake'
 
 
 configure do
-  set :views, File.join(Sinatra::Application.root, "app", "views")
+ set :views, Sinatra::Application.root.join("app", "views")
 end
-
-run Sinatra::Application
