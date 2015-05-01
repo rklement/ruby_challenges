@@ -2,10 +2,11 @@ source 'https://rubygems.org'
 require "bundler/setup"
 
 gem 'pg'
-
+gem 'rake', '~> 10.4.2'
+gem 'diff-lcs', '~> 1.2.5'
 gem 'sinatra'
-gem 'rake'
 gem 'rspec'
 gem 'rack'
 gem 'rack-test'
 gem 'faker'
+gem 'tilt', '~> 2.0.1'
