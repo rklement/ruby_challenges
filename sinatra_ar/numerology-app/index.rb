@@ -21,7 +21,7 @@ def get_message(path_number)
 	
 	case (path_number)
 		when 1
-			message =  "Your numerology number is #{path_number}. One is the leader. The number one indicates the ability to stand alone, and is a strong vibration. Ruled by the Sun.".
+			message = "Your numerology number is #{path_number}. One is the leader. The number one indicates the ability to stand alone, and is a strong vibration. Ruled by the Sun.".
 		when 2
 			message = "Your numerology number is #{path_number}. This is the mediator and peace-lover. The number two indicates the desire for harmony. It is a gentle, considerate, and sensitive vibration. Ruled by the Moon."
 		when 3
@@ -54,6 +54,14 @@ get '/:birthday' do
 	setup_index_view
 end
 
+def setup_index_view
+	birthdate = params[:birthday]
+	path_number = find_birth_path(birthdate)
+	@message = get_message(path_number)
+	
+	erb :index
+end
+
 get '/newpage/' do
 	@random = "hello!"
 	erb :newpage
@@ -69,11 +77,12 @@ post '/' do
 		path_number = find_birth_path(birthdate)
 		redirect "/message/#{path_number}"
 	else
-
 		@error = "Sorry, your input was invalid.  Please enter 8 numbers."
-		erb :form
 
+		erb :form
 	end
+
+
 end
 
 get '/message/:path_number' do
@@ -83,15 +92,6 @@ get '/message/:path_number' do
 end
 
 
-
-
-def setup_index_view
-	birthdate = params[:birthday]
-	path_number = find_birth_path(birthdate)
-	@message = get_message(path_number)
-	
-	erb :index
-end
 
 
 
